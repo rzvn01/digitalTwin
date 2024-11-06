@@ -136,83 +136,193 @@ function checkAndActivateSnow() {
     setInterval(fetchData, 5000); // Set up regular fetching every 5 seconds
 });
 
-  function fetchData() {
-	const url = 'https://api.thingspeak.com/channels/2364561/feeds.json?results=1';
-	$.ajax({
-	  url: url,
-	  type: 'GET',
-	  contentType: "application/json",
-	  success: function(data) {
-		console.log("Data fetched successfully:", data);
-		const latestFeed = data.feeds[data.feeds.length - 1];
-		if (style) {
-			console.log(latestFeed.field1);
-			console.log(latestFeed.field2);
-			console.log(latestFeed.field3);
-			console.log(latestFeed.field4);
-			console.log(latestFeed.field5);
-			// Convert field values to integers for comparison
-			const field1Int = parseInt(latestFeed.field1.split(".")[0], 10);
-			const field2Int = parseInt(latestFeed.field2.split(".")[0], 10);
-			const field4Int = parseInt(latestFeed.field4.split(".")[0], 10);
-			const field5Int = parseInt(latestFeed.field5.split(".")[0], 10);
-			
-			var tableRows = document.querySelectorAll("#data_table tbody tr");
+let themeIndex = 0;
 
-			tableRows[0].children[1].textContent = `${field1Int}`;
-  			tableRows[1].children[1].textContent = `${field5Int}`;
-  			tableRows[2].children[1].textContent = `${field2Int}`;
-  			tableRows[3].children[1].textContent = `${field4Int}`;
-			
-			if (field5Int > 50) {
-				style.href = 'css/light.css';
-			} else {
-				style.href = 'css/dark.css';
-			}
+function fetchData() {
+  const url = 'https://api.thingspeak.com/channels/2364561/feeds.json?results=1';
+  $.ajax({
+    url: url,
+    type: 'GET',
+    contentType: "application/json",
+    success: function(data) {
+      console.log("Data fetched successfully:", data);
+      const latestFeed = data.feeds[data.feeds.length - 1];
 
-		/* 	if (field2Int > 50) {
-				const link = document.createElement('link'); // Create a new link element
-				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
-				link.href = 'css/rain.css'; // Set the href to the CSS file path
-				document.head.appendChild(link);
-				checkAndActivateRain();
-				tableRows[2].style.backgroundColor = 'red';
-			} 
+      // Display sensor values in the table
+      const field1Int = parseInt(latestFeed.field1.split(".")[0], 10);
+      const field2Int = parseInt(latestFeed.field2.split(".")[0], 10);
+      const field4Int = parseInt(latestFeed.field4.split(".")[0], 10);
+      const field5Int = parseInt(latestFeed.field5.split(".")[0], 10);
 
-			if (field4Int < 0) {
-				const link = document.createElement('link'); // Create a new link element
-				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
-				link.href = 'css/moist.css'; // Set the href to the CSS file path
-				document.head.appendChild(link);
-				tableRows[3].style.backgroundColor = 'red';
-			} 
+      const tableRows = document.querySelectorAll("#data_table tbody tr");
+      tableRows[0].children[1].textContent = `${field1Int}`;
+      tableRows[1].children[1].textContent = `${field5Int}`;
+      tableRows[2].children[1].textContent = `${field2Int}`;
+      tableRows[3].children[1].textContent = `${field4Int}`;
 
-		  	if (field1Int > 25) {
-				const link = document.createElement('link'); // Create a new link element
-				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
-				link.href = 'css/fire.css'; // Set the href to the CSS file path
-				document.head.appendChild(link);
-				tableRows[0].style.backgroundColor = 'red';
-			} */
-		  	if(true)  {
-				const link = document.createElement('link'); // Create a new link element
-				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
-				link.href = 'css/snow.css'; // Set the href to the CSS file path
-				document.head.appendChild(link);
-				tableRows[0].style.backgroundColor = 'blue';
-				checkAndActivateSnow();
-		  	}
+       tableRows.forEach(row => {
+        row.style.backgroundColor = ""; // Reset background color to default
+      });
+	  
+      const style = document.getElementById('style-direction');
+      if (!style) {
+        console.warn("Element with id 'style-direction' not found.");
+        return;
+      }
 
-		} else {
-		  console.warn("Element with id 'style-direction' not found.");
-		}
-	  },
-	  error: function() {
-		console.error("Error fetching data.");
-	  }
-	});
+      // Remove existing theme link if it exists
+      const existingLink = document.querySelector('link[data-theme]');
+      if (existingLink) {
+        existingLink.remove();
+      }
+
+      // Apply one theme at a time in sequence
+      if (themeIndex === 0) {
+        style.href = 'css/dark.css';
+      }
+
+      if (themeIndex === 1) {
+        style.href = 'css/light.css';
+      }
+
+      if (themeIndex === 2) {
+        style.href = 'css/light.css';
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/fire.css';
+        link.setAttribute('data-theme', 'fire'); // Tag for removal later
+        document.head.appendChild(link);
+        tableRows[0].style.backgroundColor = 'red';
+      }
+
+      if (themeIndex === 3) {
+        style.href = 'css/light.css';
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/moist.css';
+        link.setAttribute('data-theme', 'moist'); // Tag for removal later
+        document.head.appendChild(link);
+        tableRows[3].style.backgroundColor = 'red';
+      }
+
+      if (themeIndex === 4) {
+        style.href = 'css/light.css';
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/rain.css';
+        link.setAttribute('data-theme', 'rain'); // Tag for removal later
+        document.head.appendChild(link);
+        tableRows[2].style.backgroundColor = 'red';
+
+        // Activate rain effect
+        let canvas = document.getElementById("canvas");
+        if (!canvas) {
+          canvas = document.createElement("canvas");
+          canvas.id = "canvas";
+          document.body.appendChild(canvas);
+        }
+        activateRain(canvas); // Directly call the rain effect
+      }
+
+      if (themeIndex === 5 || themeIndex===6) {
+        style.href = 'css/light.css';
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/snow.css';
+        link.setAttribute('data-theme', 'snow'); // Tag for removal later
+        document.head.appendChild(link);
+        tableRows[0].style.backgroundColor = 'blue';
+
+        // Activate snow effect
+        let canvas = document.getElementById("canvas");
+        if (!canvas) {
+          canvas = document.createElement("canvas");
+          canvas.id = "canvas";
+          document.body.appendChild(canvas);
+        }
+        activateSnow(canvas); // Directly call the snow effect
+      }
+
+      // Increment themeIndex to go to the next theme
+      themeIndex++;
+
+
+      // Check if cycle is complete, then remove canvas if it exists
+      if (themeIndex === 7) {
+		themeIndex =0;
+        const canvas = document.getElementById("canvas");
+        if (canvas) {
+          canvas.remove();
+        }
+      }
+    },
+    error: function() {
+      console.error("Error fetching data.");
+    }
+  });
+}
+
+// Directly embed the rain effect
+function activateRain(canvas) {
+  const ctx = canvas.getContext("2d");
+  const raindrops = [];
+
+  // Generate raindrops
+  for (let i = 0; i < 100; i++) {
+    raindrops.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, length: 10 + Math.random() * 20 });
   }
-   
+
+  function drawRain() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "rgba(80, 175, 255, 0.5)";
+    ctx.lineWidth = 2;
+
+    raindrops.forEach(drop => {
+      drop.y += 5;
+      if (drop.y > canvas.height) drop.y = 0;
+
+      ctx.beginPath();
+      ctx.moveTo(drop.x, drop.y);
+      ctx.lineTo(drop.x, drop.y + drop.length);
+      ctx.stroke();
+    });
+    requestAnimationFrame(drawRain);
+  }
+  
+  drawRain();
+}
+
+// Directly embed the snow effect
+function activateSnow(canvas) {
+  const ctx = canvas.getContext("2d");
+  const flakes = [];
+
+  // Generate snowflakes
+  for (let i = 0; i < 100; i++) {
+    flakes.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: 2 + Math.random() * 3 });
+  }
+
+  function drawSnow() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+
+    flakes.forEach(flake => {
+      flake.y += flake.size * 0.5;
+      if (flake.y > canvas.height) flake.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(flake.x, flake.y, flake.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(drawSnow);
+  }
+
+  drawSnow();
+}
+
+// Set interval for fetching data and cycling themes
+setInterval(fetchData, 10000);
+
    
    
    

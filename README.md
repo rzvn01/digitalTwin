@@ -141,6 +141,10 @@ The following page will pop-up:
 
 A demo mode is available at the following [link](https://rzvn01.github.io/digitalTwin/test.html) that will iterate through a few of the possible themes that will appear if the values received from the servers are above/below the set thresholds.
 
+## Demo Video
+
+https://github.com/user-attachments/assets/cb202cae-7384-45f1-a961-a0ba6f08e30e
+
 
 ## Troubleshooting
 
@@ -148,9 +152,6 @@ A demo mode is available at the following [link](https://rzvn01.github.io/digita
 - Ensure the sensors are correctly wired.
 - Make sure all packages are up-to-date and not deprecated.
 
-## Demo Video
-
-https://github.com/user-attachments/assets/cb202cae-7384-45f1-a961-a0ba6f08e30e
 
 ## References
 

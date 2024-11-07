@@ -8,7 +8,7 @@
 
 Our project focuses on implementing a versatile system that combines various sensors, such as Light Dependent
 Resistors (LDRs), water sensors, and a BME280 sensor, with a display. The goal is to create a portable device that
-can monitor for our plants conditions, providing real-time data on light levels, water presence, temperature, humidity,
+can monitor  our plants conditions, providing real-time data on light levels, water presence, temperature, humidity,
 and pressure. The system utilizes MicroPython, making it easy to deploy and program.
 
 ## Wiring Schematic

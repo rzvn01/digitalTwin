@@ -127,10 +127,20 @@ following text was tested under Linux-based operating system.
 > **NOTE:** The wrapper for functionality must be saved as `main.py` in order to get the desired behaviour
 > for  `deepsleep()` function.
 
-![circuit](photos/circuit.png)
+![circuit](photos/circuit.jpeg)
 
 ## See Results on ThingSpeak
 In order to see charts of the measurements obtained from the sensors visit the following [link](https://thingspeak.com/channels/2364561).
+
+## See Results Live on Web
+In order to see analyzed results of the measurements obtained from the sensors visit the following [link](https://rzvn01.github.io/digitalTwin/).
+
+The following page will pop-up:
+
+![circuit](photos/web.png)
+
+A demo mode is available at the following [link](https://rzvn01.github.io/digitalTwin/test.html) that will iterate through a few of the possible themes that will appear if the values received from the servers are above/below the set thresholds.
+
 
 ## Troubleshooting
 

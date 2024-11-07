@@ -10,7 +10,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 923129;
+    z-index: 600;
 }
 
 .fire::before {

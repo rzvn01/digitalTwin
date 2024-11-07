@@ -164,6 +164,16 @@ function checkAndActivateSnow() {
   			tableRows[2].children[1].textContent = `${field2Int}`;
   			tableRows[3].children[1].textContent = `${field4Int}`;
 			
+			tableRows.forEach(row => {
+				row.style.backgroundColor = ""; // Reset background color to default
+			  });
+            
+			// Remove existing theme link if it exists
+			const existingLink = document.querySelector('link[data-theme]');
+			if (existingLink) {
+			  existingLink.remove();
+			}
+
 			if (field5Int > 50) {
 				style.href = 'css/light.css';
 			} else {
@@ -177,6 +187,7 @@ function checkAndActivateSnow() {
 				document.head.appendChild(link);
 				checkAndActivateRain();
 				tableRows[2].style.backgroundColor = 'red';
+				link.setAttribute('data-theme', 'rain');
 			} 
 
 			if (field4Int < 30) {
@@ -185,14 +196,16 @@ function checkAndActivateSnow() {
 				link.href = 'css/moist.css'; // Set the href to the CSS file path
 				document.head.appendChild(link);
 				tableRows[3].style.backgroundColor = 'red';
+				link.setAttribute('data-theme', 'moist');
 			} 
 
-		  	if (field1Int > 25) {
+		  	if (field1Int > 35) {
 				const link = document.createElement('link'); // Create a new link element
 				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
 				link.href = 'css/fire.css'; // Set the href to the CSS file path
 				document.head.appendChild(link);
 				tableRows[0].style.backgroundColor = 'red';
+				link.setAttribute('data-theme', 'fire');
 			}
 			
 		  	if(field1Int<10)  {
@@ -202,6 +215,7 @@ function checkAndActivateSnow() {
 				document.head.appendChild(link);
 				tableRows[0].style.backgroundColor = 'blue';
 				checkAndActivateSnow();
+				link.setAttribute('data-theme', 'snow');
 		  	}
 
 		} else {

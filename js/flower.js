@@ -120,7 +120,7 @@ function checkAndActivateSnow() {
   const root = document.documentElement;
   const style = document.getElementById('style-direction');
   onload = () => {
-	setTimeout(() => document.body.classList.remove("not-loaded"), 1000);
+	setTimeout(() => document.body.classList.remove("not-loaded"), 5000);
   };
    
   let temperatureValues = [];
@@ -170,7 +170,7 @@ function checkAndActivateSnow() {
 				style.href = 'css/dark.css';
 			}
 
-		/* 	if (field2Int > 50) {
+			if (field2Int > 50) {
 				const link = document.createElement('link'); // Create a new link element
 				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
 				link.href = 'css/rain.css'; // Set the href to the CSS file path
@@ -193,8 +193,9 @@ function checkAndActivateSnow() {
 				link.href = 'css/fire.css'; // Set the href to the CSS file path
 				document.head.appendChild(link);
 				tableRows[0].style.backgroundColor = 'red';
-			} */
-		  	if(true)  {
+			}
+			
+		  	if(field1Int<10)  {
 				const link = document.createElement('link'); // Create a new link element
 				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
 				link.href = 'css/snow.css'; // Set the href to the CSS file path

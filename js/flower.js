@@ -179,7 +179,7 @@ function checkAndActivateSnow() {
 				tableRows[2].style.backgroundColor = 'red';
 			} 
 
-			if (field4Int < 0) {
+			if (field4Int < 30) {
 				const link = document.createElement('link'); // Create a new link element
 				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
 				link.href = 'css/moist.css'; // Set the href to the CSS file path

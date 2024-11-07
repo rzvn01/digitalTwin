@@ -1,10 +1,3 @@
-$(window).on('resize', function() {
-    if ($(window).width() < 650) {
-        $('#header').hide(); // hides instead of removing
-    } else {
-        $('#header').show(); // shows again if window is resized to above 650
-    }
-}).resize();
 
 function checkAndActivateSnow() {
 	// Check if "snow.css" is present in the document
@@ -207,7 +200,7 @@ function checkAndActivateSnow() {
 				link.setAttribute('data-theme', 'moist');
 			} 
 
-		  	if (field1Int > 35) {
+		  	if (field1Int > 30) {
 				const link = document.createElement('link'); // Create a new link element
 				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
 				link.href = 'css/fire.css'; // Set the href to the CSS file path
@@ -216,7 +209,7 @@ function checkAndActivateSnow() {
 				link.setAttribute('data-theme', 'fire');
 			}
 			
-		  	if(field1Int<10)  {
+		  	if(field1Int < 10)  {
 				const link = document.createElement('link'); // Create a new link element
 				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
 				link.href = 'css/snow.css'; // Set the href to the CSS file path

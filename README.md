@@ -145,8 +145,7 @@ https://github.com/rzvn01/de2_project/assets/100044309/8582fe24-e609-41d4-9360-a
 ## References
 
 1. MicroPython Documentation: [MicroPython](https://micropython.org/)
-2. SH1106 OLED Driver Source Code: [SH1106](https://github.com/robert-hh/SH1106)
-3. ESP8266 Documentation: [ESP32 MicroPython](https://docs.micropython.org/en/latest/esp32/quickref.html)
-4. BME280
+2. ESP8266 Documentation: [ESP32 MicroPython](https://docs.micropython.org/en/latest/esp32/quickref.html)
+3. BME280
    Datasheet: [BME280 Datasheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf)
-5. LCD 1602A [LCD Datash](https://hades.mech.northwestern.edu/images/f/f7/LCD16x2_HJ1602A.pdf)
+4. LCD 1602A [LCD Datash](https://hades.mech.northwestern.edu/images/f/f7/LCD16x2_HJ1602A.pdf)

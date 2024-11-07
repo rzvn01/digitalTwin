@@ -1,3 +1,11 @@
+$(window).on('resize', function() {
+    if ($(window).width() < 650) {
+        $('#header').hide(); // hides instead of removing
+    } else {
+        $('#header').show(); // shows again if window is resized to above 650
+    }
+}).resize();
+
 function checkAndActivateSnow() {
 	// Check if "snow.css" is present in the document
 	const snowCSS = Array.from(document.styleSheets).some(sheet =>
@@ -190,7 +198,7 @@ function checkAndActivateSnow() {
 				link.setAttribute('data-theme', 'rain');
 			} 
 
-			if (field4Int < 30) {
+			if (field4Int < 20) {
 				const link = document.createElement('link'); // Create a new link element
 				link.rel = 'stylesheet'; // Set the relationship to "stylesheet"
 				link.href = 'css/moist.css'; // Set the href to the CSS file path

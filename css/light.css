@@ -988,3 +988,8 @@ td {
   color: rgb(243, 221, 221);
   text-shadow: 2px 2px 8px #555;
 }
+button {
+  background-color: rgb(33, 159, 92, 0.8);
+  color: #ddd;
+  text-shadow: 1px 1px 8px #454444;
+}

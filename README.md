@@ -150,7 +150,7 @@ A demo mode is available at the following [link](https://rzvn01.github.io/digita
 
 ## Demo Video
 
-https://github.com/user-attachments/assets/07a246b5-6dd7-4953-a54f-d63a71f5beef
+https://github.com/user-attachments/assets/cb202cae-7384-45f1-a961-a0ba6f08e30e
 
 ## References
 
